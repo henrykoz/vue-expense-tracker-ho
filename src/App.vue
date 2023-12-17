@@ -21,17 +21,20 @@ import AddTransaction from "./components/AddTransaction.vue";
 
 import { useToast } from "vue-toastification";
 
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 const toast = useToast();
 
 //Transactions array
-const transactions = ref([
-  { id: 1, text: "Flower", amount: -24.99 },
-  { id: 2, text: "Salary", amount: 1600 },
-  { id: 3, text: "Book", amount: -12 },
-  { id: 4, text: "Camera", amount: 150 },
-]);
+const transactions = ref([]);
+
+onMounted(() => {
+  const savedTransactions = JSON.parse(localStorage.getItem("transactions"));
+
+  if (savedTransactions) {
+    transactions.value = savedTransactions;
+  }
+});
 
 //Get total
 const total = computed(() => {
@@ -67,6 +70,8 @@ const handleTransactionSubmitted = (transactionData) => {
     text: transactionData.text,
     amount: transactionData.amount,
   });
+  saveTransactionsToLocalStorage();
+
   toast.success("Transaction added");
 };
 
@@ -81,6 +86,13 @@ const handleTransactionDeleted = (id) => {
     (transaction) => transaction.id !== id
   );
 
-  toast.success("Transaction deleted");
+  saveTransactionsToLocalStorage();
+
+  toast.success("Transaction deleted.");
+};
+
+//Save transactions to local storage
+const saveTransactionsToLocalStorage = () => {
+  localStorage.setItem("transactions", JSON.stringify(transactions.value));
 };
 </script>
