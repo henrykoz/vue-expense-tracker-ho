@@ -3,7 +3,7 @@
   <div class="container">
     <Balance :total="total" />
     <IncomeExpense />
-    <TransactionList :transactions="transactions" /> // passing a prop
+    <TransactionList :transactions="transactions" />
     <AddTransaction />
   </div>
 </template>
@@ -18,9 +18,9 @@ import AddTransaction from "./components/AddTransaction.vue";
 import { ref, computed } from "vue";
 
 const transactions = ref([
-  { id: 1, text: "Flower", amount: -20 },
-  { id: 2, text: "Salary", amount: 300 },
-  { id: 3, text: "Book", amount: -10 },
+  { id: 1, text: "Flower", amount: -24.99 },
+  { id: 2, text: "Salary", amount: 1600 },
+  { id: 3, text: "Book", amount: -12 },
   { id: 4, text: "Camera", amount: 150 },
 ]);
 
