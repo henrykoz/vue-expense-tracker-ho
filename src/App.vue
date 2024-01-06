@@ -72,7 +72,7 @@ const handleTransactionSubmitted = (transactionData) => {
   });
   saveTransactionsToLocalStorage();
 
-  toast.success("Transaction added");
+  toast.success("Transaction added successfully");
 };
 
 //Genrate unique Id
